@@ -22,6 +22,7 @@ jsrun \
 -c ALL_CPUS \
 -g 1 \
 -l gpu-cpu \
+-M -disable_gpu_hooks \
 -b rs \
 "$ROOT"/build-vortex/kokkos-kernels/perf_test/sparse/sparse_kk_spmv_merge \
 $HOME/suitesparse/reals_med/*.mtx
