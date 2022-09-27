@@ -1,3 +1,6 @@
+- Kokkos: `develop`
+- Kokkos Kernels: `feature/merge-path`
+
 OpenMP run on Vortex
 ```bash
 jsrun -n1 -c 44 -g 1 -b rs -M -disable_gpu_hooks kokkos-kernels/perf_test/sparse/sparse_kk_spmv_merge ~/suitesparse/kind_undirected_graph/pdb1HYS.mtx
