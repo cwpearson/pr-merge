@@ -72,11 +72,6 @@ elif [[ "$host" =~ .*vortex.* ]]; then
     module load spectrum-mpi/rolling-release
     echo module load nsight-compute/2020.3.1
     module load nsight-compute/2020.3.1
-
-    which cmake
-    which gcc
-    which nvcc
-    which mpirun
 elif [[ "$host" =~ .*attaway.* ]]; then
 # CUDA 10.1 & cmake 3.18.0 together cause some problem with recognizing the `-pthread` flag.
 
