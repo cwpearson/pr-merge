@@ -1,0 +1,6 @@
+[submodule "kokkos"]
+	path = kokkos
+	url = git@github.com:cwpearson/kokkos.git
+[submodule "kokkos-kernels"]
+	path = kokkos-kernels
+	url = git@github.com:cwpearson/kokkos-kernels.git
