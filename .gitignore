@@ -1,1 +1,3 @@
 build-*
+scripts/**/*.o*
+scripts/**/*.e*
