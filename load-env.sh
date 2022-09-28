@@ -73,7 +73,6 @@ elif [[ "$host" =~ .*vortex.* ]]; then
     echo module load nsight-compute/2020.3.1
     module load nsight-compute/2020.3.1
 elif [[ "$host" =~ .*attaway.* ]]; then
-# CUDA 10.1 & cmake 3.18.0 together cause some problem with recognizing the `-pthread` flag.
 
     echo "$host" matched attaway
     
@@ -85,4 +84,16 @@ elif [[ "$host" =~ .*attaway.* ]]; then
     module load cde/v3/gcc/10.3.0
     echo module load cmake/3.22.3
     module load cmake/3.22.3
+elif [[ "$host" =~ .*blake.* ]]; then
+
+    echo "$host" matched blake
+    
+    echo module --force purge
+    module --force purge
+
+    echo module load gcc/10.2.0
+    module load gcc/10.2.0
+    echo module load cmake/3.22.2
+    module load cmake/3.22.2
 fi
+
