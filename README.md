@@ -100,3 +100,39 @@ Interactive:
 ```bash
 salloc --nodes=1 --ntaskts-per-node=36 --time=4:00:00 --account=PUT_YOUR_WCID_HERE
 ```
+
+## Blake
+
+OpenMP
+```bash
+source ../load-env.sh
+cmake .. \
+-DKokkos_ENABLE_OPENMP=ON \
+-DKokkos_ARCH_SKL=ON \
+-DCMAKE_BUILD_TYPE=Release \
+-DKokkos_ENABLE_HWLOC=Off \
+-DKokkosKernels_INST_COMPLEX_FLOAT=ON \
+-DKokkosKernels_INST_DOUBLE=ON \
+-DKokkosKernels_INST_FLOAT=OFF \
+-DKokkosKernels_INST_HALF=OFF \
+-DKokkosKernels_INST_OFFSET_INT=OFF \
+-DKokkosKernels_INST_OFFSET_SIZE_T=ON \
+-DKokkosKernels_INST_LAYOUTRIGHT=ON \
+-DKokkosKernels_INST_LAYOUTLEFT=ON \
+-DKokkosKernels_ENABLE_TESTS=ON
+```
+
+Interactive:
+```bash
+salloc -N 1 --time=02:00:00 
+```
+
+batch
+```
+sbatch new-spmv.sh
+```
+
+jobs
+```
+squeue
+```
