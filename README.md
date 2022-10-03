@@ -179,3 +179,28 @@ jobs
 ```
 squeue
 ```
+
+
+## Perlmutter
+
+CUDA
+```bash
+source ../load-env.sh
+cmake .. \
+-DCMAKE_CXX_COMPILER=${NVCC_WRAPPER} \
+-DCMAKE_BUILD_TYPE=Release \
+-DKokkos_ENABLE_HWLOC=Off \
+-DKokkosKernels_INST_COMPLEX_FLOAT=ON \
+-DKokkosKernels_INST_DOUBLE=ON \
+-DKokkosKernels_INST_FLOAT=ON \
+-DKokkosKernels_INST_HALF=OFF \
+-DKokkosKernels_INST_OFFSET_INT=ON \
+-DKokkosKernels_INST_OFFSET_SIZE_T=ON \
+-DKokkosKernels_INST_LAYOUTRIGHT=ON \
+-DKokkosKernels_ENABLE_TESTS=ON \
+-DKokkos_ENABLE_CUDA=ON \
+-DKokkos_ENABLE_CUDA_LAMBDA=On \
+-DKokkos_ARCH_AMPERE80=On \
+-DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
+-DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF
+```
