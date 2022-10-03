@@ -5,7 +5,7 @@
 #SBATCH -A m3918_g
 #SBATCH -q regular
 #SBATCH --time=03:00:00
-#SBATCH -J kk-spmv
+#SBATCH -J new-spmv
 
 shopt -s extglob
 
