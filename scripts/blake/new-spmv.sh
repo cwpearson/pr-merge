@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -N 1
 #SBATCH -p blake
-#SBATCH --time=04:00:00
+#SBATCH --time=02:00:00
 #SBATCH -o new-smpv.o%j
 #SBATCH -e new-smpv.e%j
 

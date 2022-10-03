@@ -95,5 +95,16 @@ elif [[ "$host" =~ .*blake.* ]]; then
     module load gcc/10.2.0
     echo module load cmake/3.22.2
     module load cmake/3.22.2
+elif [[ "$host" =~ .*caraway.* ]]; then
+
+    echo "$host" matched caraway
+    
+    echo module --force purge
+    module --force purge
+
+    echo module load rocm/5.2.0
+    module load rocm/5.2.0
+    echo module load cmake/3.22.2
+    module load cmake/3.22.2
 fi
 

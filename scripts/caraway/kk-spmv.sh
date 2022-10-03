@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -N 1
-#SBATCH -p blake
+#SBATCH -p MI100
 #SBATCH --time=01:00:00
 #SBATCH -o kk-smpv.o%j
 #SBATCH -e kk-smpv.e%j
@@ -19,8 +19,8 @@ date
 echo "reals_med"
 echo "path,rows,nnz,us,GFLOPS,GB/s"
 for m in $HOME/suitesparse/reals_med/*.mtx; do
-#   "$ROOT"/build-blake/kokkos-kernels/perf_test/sparse/sparse_spmv -t kk_kernels -f $m
-  out=`"$ROOT"/build-blake/kokkos-kernels/perf_test/sparse/sparse_spmv -t kk-kernels -f $m`
+#   "$ROOT"/build-caraway/kokkos-kernels/perf_test/sparse/sparse_spmv -t kk_kernels -f $m
+  out=`"$ROOT"/build-caraway/kokkos-kernels/perf_test/sparse/sparse_spmv -t kk-kernels -f $m`
   out=$(echo "$out" | head -n3 | tail -n1)
   nnz=$(echo $out | tr -s ' ' | cut -d' ' -f1)
   nr=$(echo $out | tr -s ' ' | cut -d' ' -f2)

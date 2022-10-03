@@ -120,11 +120,54 @@ cmake .. \
 -DKokkosKernels_INST_LAYOUTRIGHT=ON \
 -DKokkosKernels_INST_LAYOUTLEFT=ON \
 -DKokkosKernels_ENABLE_TESTS=ON
+
+m sparse_kk_spmv_merge sparse_spmv KokkosKernels_graph_openmp
 ```
 
 Interactive:
 ```bash
 salloc -N 1 --time=02:00:00 
+```
+
+batch
+```
+sbatch new-spmv.sh
+```
+
+jobs
+```
+squeue
+```
+
+## Caraway
+
+Caraway has a few different kinds of nodes: `sinfo parition`
+
+
+`VEGA908` for MI100
+HIP+Serial
+```bash
+source ../load-env.sh
+cmake .. \
+-DCMAKE_BUILD_TYPE=Release \
+-DKokkosKernels_INST_COMPLEX_FLOAT=ON \
+-DKokkosKernels_INST_DOUBLE=ON \
+-DKokkosKernels_INST_FLOAT=ON \
+-DKokkosKernels_INST_HALF=OFF \
+-DKokkosKernels_INST_OFFSET_INT=ON \
+-DKokkosKernels_INST_OFFSET_SIZE_T=ON \
+-DKokkosKernels_INST_LAYOUTRIGHT=ON \
+-DKokkosKernels_ENABLE_TESTS=ON \
+-DKokkos_ENABLE_HIP=ON \
+-DKokkos_ARCH_VEGA908=ON \
+-DKokkosKernels_ENABLE_TPL_ROCSPARSE=OFF
+
+m sparse_kk_spmv_merge sparse_spmv
+```
+
+Interactive:
+```bash
+salloc -N 1 -p MI100 --time=00:30:00 
 ```
 
 batch
