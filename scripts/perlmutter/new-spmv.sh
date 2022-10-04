@@ -4,8 +4,10 @@
 #SBATCH --gpus-per-node 1
 #SBATCH -A m3918_g
 #SBATCH -q regular
-#SBATCH --time=03:00:00
+#SBATCH --time=02:00:00
 #SBATCH -J new-spmv
+#SBATCH -e new-spmv.e%j
+#SBATCH -o new-spmv.o%j
 
 shopt -s extglob
 

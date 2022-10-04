@@ -11,7 +11,7 @@ CUDA
 ```bash
 source ../load-env.sh
 cmake .. \
--DCMAKE_CXX_COMPILER=${NVCC_WRAPPER} \
+-DCMAKE_CXX_COMPILER=${CC} \
 -DCMAKE_BUILD_TYPE=Release \
 -DKokkos_ENABLE_HWLOC=Off \
 -DKokkosKernels_INST_COMPLEX_FLOAT=ON \
