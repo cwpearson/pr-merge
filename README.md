@@ -204,3 +204,70 @@ cmake .. \
 -DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF
 ```
+
+## Crusher
+
+salloc -A csc465 -J interactive -t 01:00:00 -p batch -N 1
+
+`VEGA90A` for MI200
+HIP+Serial
+```bash
+source ../load-env.sh
+cmake .. \
+-DCMAKE_CXX_COMPILER=CC \
+-DCMAKE_BUILD_TYPE=Release \
+-DKokkosKernels_INST_COMPLEX_FLOAT=ON \
+-DKokkosKernels_INST_DOUBLE=ON \
+-DKokkosKernels_INST_FLOAT=ON \
+-DKokkosKernels_INST_HALF=OFF \
+-DKokkosKernels_INST_OFFSET_INT=ON \
+-DKokkosKernels_INST_OFFSET_SIZE_T=ON \
+-DKokkosKernels_ENABLE_TESTS=ON \
+-DKokkos_ENABLE_HIP=ON \
+-DKokkos_ARCH_VEGA90A=ON \
+-DKokkosKernels_ENABLE_TPL_ROCSPARSE=OFF
+
+m sparse_kk_spmv_merge sparse_spmv
+```
+
+### profiling
+
+kernels called, time
+```
+rocprof --stats --timestamp on kokkos-kernels/perf_test/sparse/sparse_kk_spmv_merge ~/csc465/proj-shared/cpearson/suitesparse/reals_med/2cubes_sphere.mtx
+```
+
+```
+
+```
+
+```
+  gpu-agent0 : TCC_HIT[0-31] : Number of cache hits.
+      block TCC has 4 counters
+
+  gpu-agent0 : TCC_MISS[0-31] : Number of cache misses. UC reads count as misses.
+      block TCC has 4 counters
+gpu-agent0 : SQ_LDS_BANK_CONFLICT : Number of cycles LDS is stalled by bank conflicts. (emulated)
+      block SQ has 8 counters
+  gpu-agent0 : SQ_INSTS_LDS : Number of LDS instructions issued (including FLAT). (per-simd, emulated)
+      block SQ has 8 counters
+
+  gpu-agent0 : SQ_INSTS_GDS : Number of GDS instructions issued. (per-simd, emulated)
+      block SQ has 8 counters
+
+  gpu-agent0 : SQ_WAIT_INST_LDS : Number of wave-cycles spent waiting for LDS instruction issue. In units of 4 cycles. (per-simd, nondeterministic)
+      block SQ has 8 counters
+```
+
+```
+gpu-agent0 : TCC_HIT_sum : Number of cache hits. Sum over TCC instances.
+      TCC_HIT_sum = sum(TCC_HIT,32)
+
+  gpu-agent0 : TCC_MISS_sum : Number of cache misses. Sum over TCC instances.
+      TCC_MISS_sum = sum(TCC_MISS,32)
+```
+- Glossary
+  - TCC:
+  - GDS: global data share, globally-shared explicitly-addressed memory
+
+Atomics are generally classified as write requests
