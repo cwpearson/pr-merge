@@ -127,5 +127,19 @@ elif [[ "$host" =~ .*kokkos-dev.* ]]; then
     module load sems-cuda/11.4.2
     echo module load sems-cmake/3.23.1
     module load sems-cmake/3.23.1
+elif [[ "$host" =~ .*rzvernal.* ]]; then
+    echo "$host" matched rzvernal
+    
+    echo module load cmake/3.24.2
+    module load cmake/3.24.2
+    # BSR matrix crashes rocm/5.3.0
+    echo module load rocm/5.3.0
+    module load rocm/5.3.0
+    # BSR matrix crashes rocm/5.2.0
+    # echo module load rocm/5.2.0
+    # module load rocm/5.2.0
+
+    echo export CRAYPE_LINK_TYPE=dynamic
+    export CRAYPE_LINK_TYPE=dynamic
 fi
 
