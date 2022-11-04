@@ -214,17 +214,12 @@ HIP+Serial
 ```bash
 source ../load-env.sh
 cmake .. \
--DCMAKE_CXX_COMPILER=CC \
+-DCMAKE_CXX_COMPILER=hipcc \
 -DCMAKE_BUILD_TYPE=Release \
--DKokkosKernels_INST_COMPLEX_FLOAT=ON \
--DKokkosKernels_INST_DOUBLE=ON \
--DKokkosKernels_INST_FLOAT=ON \
--DKokkosKernels_INST_HALF=OFF \
--DKokkosKernels_INST_OFFSET_INT=ON \
--DKokkosKernels_INST_OFFSET_SIZE_T=ON \
 -DKokkosKernels_ENABLE_TESTS=ON \
 -DKokkos_ENABLE_HIP=ON \
 -DKokkos_ARCH_VEGA90A=ON \
+-DKokkos_ARCH_ZEN3=ON \
 -DKokkosKernels_ENABLE_TPL_ROCSPARSE=OFF
 
 m sparse_kk_spmv_merge sparse_spmv

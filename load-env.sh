@@ -106,16 +106,16 @@ elif [[ "$host" =~ .*caraway.* ]]; then
     module load rocm/5.2.0
     echo module load cmake/3.22.2
     module load cmake/3.22.2
-elif [[ "$host" =~ .*crusher.* ]]; then
-    echo "$host" matched crusher
+elif [[ $LMOD_SYSTEM_NAME =~ crusher ]]; then
+    echo LMOD_SYSTEM_NAME matched crusher
     
     echo export CRAYPE_LINK_TYPE=dynamic
     export CRAYPE_LINK_TYPE=dynamic
 
     echo module load PrgEnv-amd
     module load PrgEnv-amd
-    echo module load rocm/5.1.0
-    module load rocm/5.1.0
+    echo module load rocm/5.2.0
+    module load rocm/5.2.0
     echo module load cmake/3.22.2
     module load cmake/3.22.2
 fi
