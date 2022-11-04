@@ -74,6 +74,24 @@ cmake .. \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF \
 ```
 
+## kokkos-dev-2
+
+OpenMP + CUDA
+```bash
+source ../load-env.sh
+cmake .. \
+-DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_CXX_COMPILER=${NVCC_WRAPPER} \
+-DCMAKE_CXX_FLAGS="-Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wuninitialized" \
+-DKokkos_ENABLE_OPENMP=ON \
+-DKokkos_ARCH_SKX=ON \
+-DKokkos_ENABLE_CUDA=ON \
+-DKokkos_ENABLE_CUDA_LAMBDA=On \
+-DKokkos_ARCH_VOLTA70=ON \
+-DKokkosKernels_ENABLE_TESTS=ON \
+-DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF
+```
+
 ## Attaway
 
 OpenMP
@@ -266,3 +284,36 @@ gpu-agent0 : TCC_HIT_sum : Number of cache hits. Sum over TCC instances.
   - GDS: global data share, globally-shared explicitly-addressed memory
 
 Atomics are generally classified as write requests
+
+
+## rzvernal
+
+* using CC instead of hipcc causes the compiler to crash
+
+`VEGA90A` for MI250x
+HIP+Serial
+```bash
+source ../load-env.sh
+cmake .. \
+-DCMAKE_CXX_COMPILER=hipcc \
+-DCMAKE_BUILD_TYPE=Release \
+-DKokkosKernels_INST_COMPLEX_FLOAT=ON \
+-DKokkosKernels_INST_DOUBLE=ON \
+-DKokkosKernels_INST_FLOAT=ON \
+-DKokkosKernels_INST_HALF=OFF \
+-DKokkosKernels_INST_OFFSET_INT=ON \
+-DKokkosKernels_INST_OFFSET_SIZE_T=ON \
+-DKokkosKernels_ENABLE_TESTS=ON \
+-DKokkos_ENABLE_HIP=ON \
+-DKokkos_ARCH_VEGA90A=ON \
+-DKokkosKernels_ENABLE_TPL_ROCSPARSE=OFF
+```
+
+```bash
+m sparse_kk_spmv_merge sparse_spmv KokkosKernels_graph_hip
+```
+
+```bash
+salloc -G 1
+srun -n 1 -G 1 -c 2 kokkos-kernels/perf_test/sparse/sparse_kk_spmv_merge ~/suitesparse/reals_med/apache1.mtx
+```
