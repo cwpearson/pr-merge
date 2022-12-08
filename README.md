@@ -1,6 +1,15 @@
 - Kokkos: `develop`
 - Kokkos Kernels: `feature/merge-path`
 
+```
+m KokkosKernels_common_cuda KokkosKernels_graph_cuda
+
+jsrun -n1 -c 44 -g 1 -b rs -M -disable_gpu_hooks kokkos-kernels/graph/unit_test/KokkosKernels_graph_cuda --gtest_filter="*merge*"
+
+jsrun -n1 -c 44 -g 1 -b rs -M -disable_gpu_hooks kokkos-kernels/graph/unit_test/KokkosKernels_graph_cuda --gtest_filter="*load_balance*"
+
+jsrun -n1 -c 44 -g 1 -b rs -M -disable_gpu_hooks kokkos-kernels/common/unit_test/KokkosKernels_common_cuda --gtest_filter="*lower_bound*"
+```
 OpenMP run on Vortex
 ```bash
 jsrun -n1 -c 44 -g 1 -b rs -M -disable_gpu_hooks kokkos-kernels/perf_test/sparse/sparse_kk_spmv_merge ~/suitesparse/kind_undirected_graph/pdb1HYS.mtx
@@ -20,13 +29,13 @@ cmake .. \
 -DKokkosKernels_INST_HALF=OFF \
 -DKokkosKernels_INST_OFFSET_INT=ON \
 -DKokkosKernels_INST_OFFSET_SIZE_T=ON \
--DKokkosKernels_INST_LAYOUTRIGHT=ON \
 -DKokkosKernels_ENABLE_TESTS=ON \
 -DKokkos_ENABLE_CUDA=ON \
 -DKokkos_ENABLE_CUDA_LAMBDA=On \
 -DKokkos_ARCH_VOLTA70=On \
 -DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
--DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF
+-DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF \
+-DKokkosKernels_ENABLE_GRAPH=ON
 ```
 
 OpenMP
@@ -52,7 +61,7 @@ OpenMP + CUDA
 ```bash
 source ../load-env.sh
 cmake .. \
--DKokkos_ENABLE_TESTS=ON \
+-DKokkos_ENABLE_TESTS=OFF \
 -DKokkos_ENABLE_OPENMP=ON \
 -DKokkos_ARCH_POWER9=On \
 -DCMAKE_BUILD_TYPE=Release \
@@ -72,6 +81,8 @@ cmake .. \
 -DKokkos_ARCH_VOLTA70=On \
 -DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF \
+-DKokkosKernels_ENABLE_ALL_COMPONENTS=OFF \
+-DKokkosKernels_ENABLE_GRAPH=ON
 ```
 
 ## kokkos-dev-2
