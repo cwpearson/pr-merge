@@ -108,8 +108,9 @@ OpenMP
 source ../load-env.sh
 cmake .. \
 -DKokkos_ENABLE_OPENMP=ON \
--DKokkos_ARCH_SKL=ON \
+-DKokkos_ARCH_SKX=ON \
 -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_CXX_FLAGS="-g" \
 -DKokkos_ENABLE_HWLOC=Off \
 -DKokkosKernels_INST_COMPLEX_FLOAT=ON \
 -DKokkosKernels_INST_DOUBLE=ON \
@@ -145,6 +146,7 @@ Caraway has a few different kinds of nodes: `sinfo parition`
 
 
 `VEGA908` for MI100
+`VEGA90A` for MI200
 HIP+Serial
 ```bash
 source ../load-env.sh
@@ -153,13 +155,10 @@ cmake .. \
 -DKokkosKernels_INST_COMPLEX_FLOAT=ON \
 -DKokkosKernels_INST_DOUBLE=ON \
 -DKokkosKernels_INST_FLOAT=ON \
--DKokkosKernels_INST_HALF=OFF \
--DKokkosKernels_INST_OFFSET_INT=ON \
 -DKokkosKernels_INST_OFFSET_SIZE_T=ON \
--DKokkosKernels_INST_LAYOUTRIGHT=ON \
 -DKokkosKernels_ENABLE_TESTS=ON \
 -DKokkos_ENABLE_HIP=ON \
--DKokkos_ARCH_VEGA908=ON \
+-DKokkos_ARCH_VEGA90A=ON \
 -DKokkosKernels_ENABLE_TPL_ROCSPARSE=OFF
 
 m sparse_kk_spmv_merge sparse_spmv
