@@ -6,7 +6,6 @@
 #SBATCH -e new-smpv.e%j
 
 shopt -s extglob
-set -x
 
 ROOT=/home/cwpears/repos/pr-merge
 
