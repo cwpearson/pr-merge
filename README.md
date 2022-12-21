@@ -81,8 +81,7 @@ cmake .. \
 -DKokkos_ARCH_VOLTA70=On \
 -DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF \
--DKokkosKernels_ENABLE_ALL_COMPONENTS=OFF \
--DKokkosKernels_ENABLE_GRAPH=ON
+-DKokkosKernels_ENABLE_ALL_COMPONENTS=ON
 ```
 
 ## kokkos-dev-2
