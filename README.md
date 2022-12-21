@@ -208,6 +208,24 @@ jobs
 squeue
 ```
 
+### A100 on caraway
+
+```
+source $HOME/spack-caraway/spack/share/spack/setup-env.sh
+spack load cuda
+module load cmake
+export NVCC_WRAPPER=`readlink -f ../kokkos/bin/nvcc_wrapper`
+cmake .. \
+-DCMAKE_CXX_COMPILER=${NVCC_WRAPPER} \
+-DCMAKE_BUILD_TYPE=Release \
+-DKokkos_ENABLE_CUDA=ON \
+-DKokkos_ENABLE_CUDA_LAMBDA=On \
+-DKokkos_ARCH_AMPERE80=On \
+-DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
+-DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF \
+-DKokkosKernels_ENABLE_TESTS=ON
+m sparse_kk_spmv_merge sparse_spmv
+```
 
 ## Perlmutter
 
