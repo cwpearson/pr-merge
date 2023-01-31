@@ -1,0 +1,11 @@
+
+pmc : Wavefronts TCC_HIT_sum TCC_MISS_sum L2CacheHit 
+pmc : FetchSize WriteSize MemWrites32B
+pmc : LDSInsts GDSInsts
+pmc : MemUnitBusy MemUnitStalled WriteUnitStalled ALUStalledByLDS
+pmc : VALUUtilization VALUInsts SALUInsts
+# Filter by dispatches range, GPU index and kernel names
+# supported range formats: "3:9", "3:", "3"
+range: 18:23
+gpu: 0
+kernel: Merge SPMV_Functor
