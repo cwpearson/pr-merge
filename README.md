@@ -204,3 +204,15 @@ cmake .. \
 -DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF
 ```
+
+```
+m sparse_kk_spmv_merge sparse_spmv KokkosKernels_graph_openmp
+```
+
+```
+salloc --nodes 1 --qos interactive --time 01:00:00 --constraint gpu --gpus 4 --account=m3918_g
+```
+
+```
+sqs
+```

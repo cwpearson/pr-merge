@@ -11,7 +11,7 @@
 
 shopt -s extglob
 
-ROOT=$HOME/repos/pr-merge
+ROOT=/global/homes/p/pearson/repos/pr-merge
 
 source $ROOT/load-env.sh
 
