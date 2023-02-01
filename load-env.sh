@@ -95,9 +95,9 @@ elif [[ "$host" =~ .*blake.* ]]; then
     module load gcc/10.2.0
     echo module load cmake/3.22.2
     module load cmake/3.22.2
-elif [[ "$host" =~ .*caraway.* ]]; then
+elif [[ "$HOSTNAME" =~ .*caraway.* || "$SLURM_CLUSTER_NAME" =~ .*caraway.* ]]; then
 
-    echo "$host" matched caraway
+    echo matched caraway
     
     echo module --force purge
     module --force purge

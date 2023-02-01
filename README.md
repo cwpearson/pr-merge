@@ -81,8 +81,7 @@ cmake .. \
 -DKokkos_ARCH_VOLTA70=On \
 -DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF \
--DKokkosKernels_ENABLE_ALL_COMPONENTS=OFF \
--DKokkosKernels_ENABLE_GRAPH=ON
+-DKokkosKernels_ENABLE_ALL_COMPONENTS=ON
 ```
 
 ## kokkos-dev-2
@@ -168,8 +167,9 @@ OpenMP
 source ../load-env.sh
 cmake .. \
 -DKokkos_ENABLE_OPENMP=ON \
--DKokkos_ARCH_SKL=ON \
+-DKokkos_ARCH_SKX=ON \
 -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_CXX_FLAGS="-g" \
 -DKokkos_ENABLE_HWLOC=Off \
 -DKokkosKernels_INST_COMPLEX_FLOAT=ON \
 -DKokkosKernels_INST_DOUBLE=ON \
@@ -205,6 +205,7 @@ Caraway has a few different kinds of nodes: `sinfo parition`
 
 
 `VEGA908` for MI100
+`VEGA90A` for MI200
 HIP+Serial
 ```bash
 source ../load-env.sh
@@ -213,13 +214,10 @@ cmake .. \
 -DKokkosKernels_INST_COMPLEX_FLOAT=ON \
 -DKokkosKernels_INST_DOUBLE=ON \
 -DKokkosKernels_INST_FLOAT=ON \
--DKokkosKernels_INST_HALF=OFF \
--DKokkosKernels_INST_OFFSET_INT=ON \
 -DKokkosKernels_INST_OFFSET_SIZE_T=ON \
--DKokkosKernels_INST_LAYOUTRIGHT=ON \
 -DKokkosKernels_ENABLE_TESTS=ON \
 -DKokkos_ENABLE_HIP=ON \
--DKokkos_ARCH_VEGA908=ON \
+-DKokkos_ARCH_VEGA90A=ON \
 -DKokkosKernels_ENABLE_TPL_ROCSPARSE=OFF
 
 m sparse_kk_spmv_merge sparse_spmv
@@ -240,6 +238,24 @@ jobs
 squeue
 ```
 
+### A100 on caraway
+
+```
+source $HOME/spack-caraway/spack/share/spack/setup-env.sh
+spack load cuda
+module load cmake
+export NVCC_WRAPPER=`readlink -f ../kokkos/bin/nvcc_wrapper`
+cmake .. \
+-DCMAKE_CXX_COMPILER=${NVCC_WRAPPER} \
+-DCMAKE_BUILD_TYPE=Release \
+-DKokkos_ENABLE_CUDA=ON \
+-DKokkos_ENABLE_CUDA_LAMBDA=On \
+-DKokkos_ARCH_AMPERE80=On \
+-DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
+-DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF \
+-DKokkosKernels_ENABLE_TESTS=ON
+m sparse_kk_spmv_merge sparse_spmv
+```
 
 ## Perlmutter
 
@@ -263,6 +279,18 @@ cmake .. \
 -DKokkos_ARCH_AMPERE80=On \
 -DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF
+```
+
+```
+m sparse_kk_spmv_merge sparse_spmv KokkosKernels_graph_openmp
+```
+
+```
+salloc --nodes 1 --qos interactive --time 01:00:00 --constraint gpu --gpus 4 --account=m3918_g
+```
+
+```
+sqs
 ```
 
 ## Crusher
@@ -290,10 +318,6 @@ m sparse_kk_spmv_merge sparse_spmv
 kernels called, time
 ```
 rocprof --stats --timestamp on kokkos-kernels/perf_test/sparse/sparse_kk_spmv_merge ~/csc465/proj-shared/cpearson/suitesparse/reals_med/2cubes_sphere.mtx
-```
-
-```
-
 ```
 
 ```
