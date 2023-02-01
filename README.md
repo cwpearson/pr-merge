@@ -87,18 +87,49 @@ cmake .. \
 
 ## kokkos-dev-2
 
+```
+m \
+KokkosKernels_common_cuda \
+KokkosKernels_common_openmp \
+KokkosKernels_graph_cuda \
+KokkosKernels_graph_openmp \
+KokkosGraph_loadbalance_perf_test \
+KokkosGraph_merge_perf_test \
+sparse_kk_spmv_merge
+
+kokkos-kernels/graph/unit_test/KokkosKernels_graph_cuda --gtest_filter="*load_balance*"
+
+kokkos-kernels/graph/unit_test/KokkosKernels_graph_cuda --gtest_filter="*merge*"
+
+kokkos-kernels/common/unit_test/KokkosKernels_common_cuda --gtest_filter="*bound*"
+```
+
 OpenMP + CUDA
 ```bash
 source ../load-env.sh
 cmake .. \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_CXX_COMPILER=${NVCC_WRAPPER} \
--DCMAKE_CXX_FLAGS="-Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wuninitialized" \
+-DCMAKE_CXX_FLAGS="-Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wuninitialized -Wunused-local-typedefs" \
 -DKokkos_ENABLE_OPENMP=ON \
+-DKokkos_ENABLE_SERIAL=OFF \
 -DKokkos_ARCH_SKX=ON \
 -DKokkos_ENABLE_CUDA=ON \
 -DKokkos_ENABLE_CUDA_LAMBDA=On \
 -DKokkos_ARCH_VOLTA70=ON \
+-DKokkosKernels_ENABLE_TESTS=ON \
+-DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF
+```
+
+Serial
+```bash
+source ../load-env.sh
+cmake .. \
+-DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_CXX_COMPILER=g++ \
+-DCMAKE_CXX_FLAGS="-Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wuninitialized -Wunused-local-typedefs" \
+-DKokkos_ENABLE_SERIAL=ON \
+-DKokkos_ARCH_SKX=ON \
 -DKokkosKernels_ENABLE_TESTS=ON \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF
 ```
