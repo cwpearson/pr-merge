@@ -94,7 +94,8 @@ KokkosKernels_graph_cuda \
 KokkosKernels_graph_openmp \
 KokkosGraph_loadbalance_perf_test \
 KokkosGraph_merge_perf_test \
-sparse_kk_spmv_merge
+sparse_kk_spmv_merge \
+sparse_kk_spmv
 
 kokkos-kernels/graph/unit_test/KokkosKernels_graph_cuda --gtest_filter="*load_balance*"
 
