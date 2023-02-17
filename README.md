@@ -97,11 +97,13 @@ KokkosGraph_merge_perf_test \
 sparse_kk_spmv_merge \
 sparse_kk_spmv
 
-kokkos-kernels/graph/unit_test/KokkosKernels_graph_cuda --gtest_filter="*load_balance*"
+m KokkosKernels_graph_cuda && kokkos-kernels/graph/unit_test/KokkosKernels_graph_cuda --gtest_filter="*load_balance*"
 
 kokkos-kernels/graph/unit_test/KokkosKernels_graph_cuda --gtest_filter="*merge*"
 
 kokkos-kernels/common/unit_test/KokkosKernels_common_cuda --gtest_filter="*bound*"
+
+m KokkosGraph_loadbalance_perf_test && kokkos-kernels/perf_test/graph/KokkosGraph_loadbalance_perf_test
 ```
 
 OpenMP + CUDA
