@@ -64,11 +64,16 @@ OpenMP + CUDA
 source ../load-env.sh
 cmake .. \
 -DCMAKE_CXX_COMPILER=${NVCC_WRAPPER} \
--DCMAKE_CXX_FLAGS="-Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wuninitialized -Wunused-local-typedefs" \
--DKokkos_ENABLE_TESTS=OFF \
--DKokkos_ENABLE_OPENMP=ON \
--DKokkos_ARCH_POWER9=On \
 -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_CXX_FLAGS="-Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wuninitialized -Wunused-local-typedefs" \
+-DCMAKE_CXX_STANDARD=17 \
+-DKokkos_ENABLE_CUDA=ON \
+-DKokkos_ENABLE_CUDA_LAMBDA=On \
+-DKokkos_ENABLE_OPENMP=ON \
+-DKokkos_ENABLE_TESTS=OFF \
+-DKokkos_ARCH_POWER9=On \
+-DKokkos_ARCH_VOLTA70=On \
+-DKokkosKernels_ENABLE_ALL_COMPONENTS=ON \
 -DKokkosKernels_INST_COMPLEX_FLOAT=OFF \
 -DKokkosKernels_INST_DOUBLE=OFF \
 -DKokkosKernels_INST_FLOAT=OFF \
@@ -77,9 +82,7 @@ cmake .. \
 -DKokkosKernels_INST_OFFSET_SIZE_T=OFF \
 -DKokkosKernels_INST_LAYOUTRIGHT=OFF \
 -DKokkosKernels_ENABLE_TESTS=ON \
--DKokkos_ENABLE_CUDA=ON \
--DKokkos_ENABLE_CUDA_LAMBDA=On \
--DKokkos_ARCH_VOLTA70=On \
+-DKokkosKernels_ENABLE_PERFTESTS=ON \
 -DKokkosKernels_INST_MEMSPACE_CUDAUVMSPACE=OFF \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF
 ```
@@ -114,6 +117,7 @@ cmake .. \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_CXX_COMPILER=${NVCC_WRAPPER} \
 -DCMAKE_CXX_FLAGS="-Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wuninitialized -Wunused-local-typedefs" \
+-DCMAKE_CXX_STANDARD=17 \
 -DKokkos_ENABLE_OPENMP=ON \
 -DKokkos_ENABLE_SERIAL=OFF \
 -DKokkos_ARCH_SKX=ON \
@@ -121,6 +125,8 @@ cmake .. \
 -DKokkos_ENABLE_CUDA_LAMBDA=On \
 -DKokkos_ARCH_VOLTA70=ON \
 -DKokkosKernels_ENABLE_TESTS=ON \
+-DKokkosKernels_ENABLE_ALL_COMPONENTS=ON \
+-DKokkosKernels_ENABLE_PERFTESTS=ON \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=OFF
 ```
 
