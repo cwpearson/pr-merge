@@ -311,7 +311,7 @@ sqs
 
 ## Crusher
 
-salloc -A csc465 -J interactive -t 01:00:00 -p batch -N 1
+salloc -A CSC465_crusher -J interactive -t 01:00:00 -p batch -N 1
 
 `VEGA90A` for MI200
 HIP+Serial
@@ -320,13 +320,16 @@ source ../load-env.sh
 cmake .. \
 -DCMAKE_CXX_COMPILER=hipcc \
 -DCMAKE_BUILD_TYPE=Release \
--DKokkosKernels_ENABLE_TESTS=ON \
+-DCMAKE_CXX_STANDARD=17 \
+-DCMAKE_EXE_LINKER_FLAGS="-lstdc++fs" \
 -DKokkos_ENABLE_HIP=ON \
 -DKokkos_ARCH_VEGA90A=ON \
 -DKokkos_ARCH_ZEN3=ON \
--DKokkosKernels_ENABLE_TPL_ROCSPARSE=OFF
-
-m sparse_kk_spmv_merge sparse_spmv
+-DKokkosKernels_ENABLE_TPL_ROCSPARSE=ON \
+-DKokkosKernels_ENABLE_ALL_COMPONENTS=ON \
+-DKokkosKernels_ENABLE_TESTS=ON \
+-DKokkosKernels_ENABLE_PERFTESTS=ON \
+-DKokkosKernels_ENABLE_BENCHMARK=ON
 ```
 
 ### profiling
