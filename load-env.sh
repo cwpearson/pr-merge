@@ -109,13 +109,19 @@ elif [[ "$HOSTNAME" =~ .*caraway.* || "$SLURM_CLUSTER_NAME" =~ .*caraway.* ]]; t
 elif [[ $LMOD_SYSTEM_NAME =~ crusher ]]; then
     echo LMOD_SYSTEM_NAME matched crusher
     
+    echo module purge
+    module purge
+
+    echo module load DefApps/default
+    module load DefApps/default
+
     echo export CRAYPE_LINK_TYPE=dynamic
     export CRAYPE_LINK_TYPE=dynamic
 
-    echo module load PrgEnv-amd
-    module load PrgEnv-amd
-    echo module load rocm/5.2.0
-    module load rocm/5.2.0
+    # echo module load PrgEnv-amd
+    # module load PrgEnv-amd
+    echo module load rocm/5.4.0
+    module load rocm/5.4.0
     echo module load cmake/3.22.2
     module load cmake/3.22.2
 elif [[ "$host" =~ .*kokkos-dev.* ]]; then
