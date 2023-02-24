@@ -18,7 +18,7 @@ date
 echo "reals_med"
 "$ROOT"/build-crusher/kokkos-kernels/perf_test/sparse/KokkosKernels_spmv_benchmark \
 $HOME/csc465/proj-shared/cpearson/suitesparse/reals_med/*.mtx \
---benchmark_filter="MatrixMarket.*f64/non-conj/.*native" \
+--benchmark_filter="MatrixMarket/.*/f64/.*/non-conj/native" \
 --benchmark_format=csv
 
 date
