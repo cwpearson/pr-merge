@@ -1,4 +1,5 @@
 build-*
 scripts/**/*.o*
+scripts/**/*.e*
 scripts/**/*.e*build*
 scripts/**/generated
