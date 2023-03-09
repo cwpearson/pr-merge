@@ -284,13 +284,14 @@ cmake .. \
 -DKokkos_ENABLE_CUDA=ON \
 -DKokkos_ENABLE_CUDA_LAMBDA=On \
 -DKokkos_ARCH_AMPERE80=On \
--DKokkos_ENABLE_HWLOC=Off \
+-DKokkos_ENABLE_HWLOC=OFF \
 -DKokkosKernels_INST_COMPLEX_FLOAT=OFF \
 -DKokkosKernels_INST_DOUBLE=OFF \
 -DKokkosKernels_INST_FLOAT=OFF \
 -DKokkosKernels_INST_HALF=OFF \
 -DKokkosKernels_INST_OFFSET_INT=OFF \
 -DKokkosKernels_INST_OFFSET_SIZE_T=OFF \
+-DKokkosKernels_INST_ORDINAL_INT=OFF \
 -DKokkosKernels_INST_LAYOUTRIGHT=OFF \
 -DKokkosKernels_ENABLE_ALL_COMPONENTS=ON \
 -DKokkosKernels_ENABLE_TESTS=ON \
@@ -303,6 +304,7 @@ cmake .. \
 
 ```
 salloc --nodes 1 --qos interactive --time 01:00:00 --constraint gpu --gpus 4 --account=m3918_g
+srun 
 ```
 
 ```
